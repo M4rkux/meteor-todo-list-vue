@@ -1,0 +1,43 @@
+<template name="todo">
+    <div id="demo" class="container">
+        <header>
+            <h1>Todo List ([[todos.length]])</h1>
+  
+             <!-- <label class="hide-completed">
+             <input
+                type="checkbox"
+                readOnly
+                v-model="hideCompleted"
+              />
+              Hide Completed Tasks
+            </label> -->
+            <form class="new-task" v-on="submit: addTodo">
+                <input
+                    v-model="newTodo"
+                    type="text"
+                    ref="textInput"
+                    placeholder="Type to add new tasks"
+                />
+            </form>
+        </header>
+
+        <h1 v-if="!subscriptionsReady">Loading...</h1>
+
+        <ul>
+            <li v-repeat="todo: todos" track-by="_id" v-class="{'checked' : todo.checked}">
+                <button class="delete" v-on="click: removeTodo(todo._id)">
+                    &times;
+                </button>
+            
+                <input
+                    type="checkbox"
+                    readOnly
+                    v-model="todo.checked"
+                    v-on="click: toggleChecked(todo)"
+                />
+            
+                <span class="text">[[todo.text]]</span>
+            </li>
+        </ul>
+    </div>
+</template>
